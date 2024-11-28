@@ -1,0 +1,3 @@
+<div class="products">
+  <app-product-card [book]="book" *ngFor="let book of (books$ | async)"></app-product-card>
+</div>

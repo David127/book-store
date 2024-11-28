@@ -1,0 +1,29 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+
+  .title {
+    margin-bottom: .5rem;
+  }
+
+  .image-container {
+    height: 200px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+
+    img {
+      width: auto;
+      height: 100%;
+    }
+  }
+
+  .price {
+    margin-top: .8rem;
+  }
+
+  .actions {
+    align-self: flex-end;
+  }
+}

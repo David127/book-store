@@ -1,1 +1,16 @@
-<p>product-card works!</p>
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title class="title">{{ book.name }}</mat-card-title>
+  </mat-card-header>
+  <figure class="image-container">
+    <img mat-card-image [src]="book.image" alt="book">
+  </figure>
+  <mat-card-content>
+    <p class="price">
+      S/ {{ book.currentPrice }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions class="actions">
+    <button mat-button (click)="addBookToCart(book)">Agregar al carrito</button>
+  </mat-card-actions>
+</mat-card>
