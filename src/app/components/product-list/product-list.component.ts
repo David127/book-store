@@ -1,7 +1,7 @@
 import { Book } from '@/models/book.interfaces';
 import { NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { ProductCardComponent } from 'src/app/shared/components/product-card/product-card.component';
+import { ProductCardComponent } from '@/components/product-card/product-card.component';
 
 @Component({
     selector: 'app-product-list',

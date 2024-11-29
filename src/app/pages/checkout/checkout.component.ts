@@ -13,6 +13,7 @@ import { TypeDocument } from '@/enums/document.enum';
 import { StoreService } from '@/services/store.service';
 import { BookItemDTO, CheckoutDTO } from '@/models/checkout.interfaces';
 import { Cart } from '@/models/book.interfaces';
+import { SpinnerService } from '@/services/spinner.service';
 
 @Component({
   selector: 'app-checkout',
@@ -34,13 +35,14 @@ export class CheckoutComponent {
   formBuilder = inject(FormBuilder);
   storeService = inject(StoreService);
   matSnackBar = inject(MatSnackBar);
+  spinnerService = inject(SpinnerService);
 
   form: FormGroup = this.formBuilder.group({
     tipoDoc: ['', Validators.required],
     doc: [{ value: '', disabled: true }, [Validators.required]],
     firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
     lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
-    phone: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
+    phone: ['', [Validators.required, Validators.pattern(/^9\d{8}$/)]],
     email: ['', [Validators.required, Validators.pattern(/^[\w\._]{5,30}\+?[\w]{0,10}@[^\d][\w\.\-]{3,}\.\w{2,5}$/)]]
   });
 
@@ -89,11 +91,14 @@ export class CheckoutComponent {
         email: this.emailField?.value,
         books,
       }
+
+      this.spinnerService.show();
       this.storeService.checkout(dto)
       .subscribe(response => {
         this.storeService.emptyCart();
+        this.spinnerService.hide();
         this.router.navigate(['/home']).then(() => {
-          this.matSnackBar.open(`Tu orden Nᵒ${response.order_id} fue realizada con éxito`, '🚀', { duration: 5000 });
+          this.matSnackBar.open(`Tu orden Nᵒ${response.data.order_id} fue realizada con éxito`, '🚀', { duration: 5000 });
         })
       });
     } else {

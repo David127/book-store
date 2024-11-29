@@ -1,21 +1,22 @@
 <mat-card class="card">
   <mat-card-header>
     <mat-card-title>{{ book.name }}</mat-card-title>
-    <mat-card-subtitle>{{ book.isbn }}</mat-card-subtitle>
+    <mat-card-subtitle>Código: {{ book.isbn }}</mat-card-subtitle>
   </mat-card-header>
   <figure class="image-container">
     <img mat-card-image [src]="book.image" alt="book">
   </figure>
   <mat-card-content>
     <p class="price">
-      S/ {{ book.currentPrice }}
+      S/ {{ book.currentPrice | number:'1.2-2' }}
     </p>
   </mat-card-content>
   <mat-card-actions class="actions">
     <button mat-button
       (click)="addBookToCart(book)"
-      [disabled]="book.stock === 0">
-      Agregar al carrito
+      [disabled]="book.stock === 0 || getQuantityByIdBook(book)">
+      <mat-icon>add_shopping_cart</mat-icon>
+      Agregar
     </button>
   </mat-card-actions>
 </mat-card>

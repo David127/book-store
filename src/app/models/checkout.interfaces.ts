@@ -13,7 +13,7 @@ export interface BookItemDTO {
   quantity: number;
 }
 
-export interface CheckoutResponse {
+export interface Checkout {
   client_id: number;
   total: number;
   doc_type: number;

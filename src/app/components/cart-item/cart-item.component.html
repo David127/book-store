@@ -1,0 +1,20 @@
+<mat-card>
+  <mat-icon class="delete-icon" (click)="deleteItem(cart.idBook)">delete_outline</mat-icon>
+  <figure class="image-container">
+    <img [src]="book.image" alt="libro">
+  </figure>
+  <div class="book-data">
+    <p class="name">{{ book.name }}</p>
+    <p>S/ {{ book.currentPrice | number: '1.2-2' }}</p>
+    <p>Stock: {{ book.stock }}</p>
+    <div class="control">
+      <button mat-icon-button type="button" (click)="addOne(cart.idBook)" [disabled]="book.stock === cart.cantidad">
+        <mat-icon>add</mat-icon>
+      </button>
+      <span>{{ cart.cantidad }}</span>
+      <button mat-icon-button type="button" (click)="removeOne(cart.idBook)">
+        <mat-icon>remove</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-card>

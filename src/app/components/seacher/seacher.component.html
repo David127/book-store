@@ -1,0 +1,8 @@
+<mat-form-field appearance="outline" class="buscador">
+  <mat-label>Buscar</mat-label>
+  <input matInput placeholder="Código o nombre" [(ngModel)]="searchTerm" (keyup)="applyFilter($event)" />
+  <mat-icon matSuffix *ngIf="!searchTerm">search</mat-icon>
+  <button mat-icon-button matSuffix *ngIf="searchTerm" (click)="resetFilter()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>

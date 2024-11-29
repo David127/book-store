@@ -11,7 +11,9 @@ export class FindProductPipe implements PipeTransform {
     if (!books || !idBook) {
       return null;
     }
-    return books.find(({ id }) => id === idBook);
+    const book =  books.find(({ id }) => id === idBook);
+    
+    return book;
   }
 
 }

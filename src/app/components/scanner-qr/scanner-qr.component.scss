@@ -1,0 +1,17 @@
+.container {
+  margin-bottom: 1rem;
+  padding: 1rem 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .scanner-qr {
+    width: 150px;
+  }
+  
+  .buttons-scanner {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+}

@@ -1,10 +1,9 @@
-<mat-drawer-container autosize>
-  <mat-drawer class="content-cart" mode="side" position="end" opened="true">
+<mat-drawer-container autosize hasBackdrop="false">
+  <mat-drawer class="content-cart" mode="over" position="end" opened="false">
     <div class="cart-grid">
       <mat-toolbar color="primary">
         <mat-toolbar-row>
-          <span>My List</span>
-          <span class="example-spacer"></span>
+          <span>Carrito</span>
           <button mat-icon-button (click)="onToggleCart()">
             <mat-icon>close</mat-icon>
           </button>
@@ -13,36 +12,22 @@
 
       <div class="list">
         <div class="item-product" *ngFor="let cart of (myCart$ | async)">
-          <mat-icon class="delete-icon" (click)="deleteItem(cart.idBook)">delete_outline</mat-icon>
-          <ng-container *ngIf="cart.idBook | findProduct: books as book">
-            <figure class="image-container">
-              <img [src]="book.image" alt="libro">
-            </figure>
-            <div class="book-data">
-              <p>{{ book.name }}</p>
-              <p>S/ {{ book.currentPrice }}</p>
-              <p>{{ book.stock }}</p>
-              <div class="control">
-                <button mat-icon-button
-                  type="button"
-                  (click)="addOne(cart.idBook)"
-                  [disabled]="book.stock === cart.cantidad">
-                  <mat-icon>add</mat-icon>
-                </button>
-                <span>{{ cart.cantidad }}</span>
-                <button mat-icon-button
-                  type="button"
-                  (click)="removeOne(cart.idBook)">
-                  <mat-icon>remove</mat-icon>
-                </button>
-              </div>
-            </div>
+          <ng-container *ngIf="cart.idBook | findProduct: (booksOriginal$ | async)! as book">
+            <app-cart-item
+              [book]="book"
+              [cart]="cart"
+              >
+            </app-cart-item>
           </ng-container>
         </div>
       </div>
 
       <div class="cart-result">
-        <p>S/ {{ getTotal((myCart$ | async)!) }}</p>
+        <div class="total">
+          <span>Total:</span>
+          <span>S/ {{ getTotal((myCart$ | async)!) }}</span>
+        </div>
+        
         <a
           routerLink="/checkout"
           mat-raised-button
@@ -56,14 +41,9 @@
 
   <div class="wrapper">
     <app-header (toggleCart)="onToggleCart()"></app-header>
+    <app-scanner-qr></app-scanner-qr>
+    <app-seacher></app-seacher>
     <div class="content">
-      <mat-form-field appearance="outline" class="buscador">
-        <mat-label>Buscar</mat-label>
-        <input matInput placeholder="Código o nombre" (keyup)="applyFilter($event)" />
-        <button mat-icon-button matSuffix *ngIf="searchTerm" (click)="searchTerm=''">
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
       <app-product-list [books]="(books$ | async)!"></app-product-list>
     </div>
   </div>
