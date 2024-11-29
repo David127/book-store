@@ -7,7 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FindProductPipe implements PipeTransform {
 
-  transform(idBook: number, books: Book[]): any {
+  transform(idBook: number, books: Book[]): Book | null | undefined {
     if (!books || !idBook) {
       return null;
     }
